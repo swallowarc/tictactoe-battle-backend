@@ -24,6 +24,7 @@ GOINSTALL = $(GOCMD) install
 export GOPRIVATE=github.com/swallowarc/*
 GRPC_PORT ?= 50051
 DOCKER_CMD = docker
+DOCKER_COMPOSE_CMD = docker-compose
 DOCKER_BUILD = $(DOCKER_CMD) build
 DOCKER_PUSH =
 DOCKER_REGISTRY = swallowarc/tictactoe-battle-backend
@@ -34,11 +35,13 @@ DOCKER_PASS ?= fake_pass
 MOCK_DIR=internal/tests/mocks/
 REDIS_HOST_PORT?=localhost:6379
 
-.PHONY: build setup-tools upgrade-grpc mock-clean mock-gen vet test docker/build docker/push
+.PHONY: build setup/tools setup/service upgrade-grpc mock-clean mock-gen vet test docker/build docker/push
 build:
 	$(GOBUILD) -a -tags netgo -installsuffix netgo $(LDFLAGS) -o bin/ -v ./...
-setup-tools:
+setup/tools:
 	$(GOINSTALL) github.com/golang/mock/mockgen@v1.5.0
+setup/service:
+	$(DOCKER_COMPOSE_CMD) -f ./docker/docker-compose.yaml up -d
 upgrade-grpc:
 	$(GOGET) -u github.com/swallowarc/tictactoe_battle_proto
 	$(GOMOD) tidy

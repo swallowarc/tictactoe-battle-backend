@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="tictactoe_battle_backend" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="tictactoe-battle-backend" />
+    <working_directory value="$PROJECT_DIR$/../tictactoe-battle-backend" />
+    <kind value="PACKAGE" />
+    <package value="github.com/swallowarc/tictactoe_battle_backend/cmd/tictactoe_battle_backend" />
+    <directory value="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+</component>
