@@ -35,7 +35,7 @@ DOCKER_PASS ?= fake_pass
 MOCK_DIR=internal/tests/mocks/
 REDIS_HOST_PORT?=localhost:6379
 
-.PHONY: build setup/tools setup/service upgrade-grpc mock-clean mock-gen vet test docker/build docker/push
+.PHONY: build setup/tools setup/service upgrade-grpc mock/clean mock/gen vet test docker/build docker/push
 build:
 	$(GOBUILD) -a -tags netgo -installsuffix netgo $(LDFLAGS) -o bin/ -v ./...
 setup/tools:
@@ -45,9 +45,9 @@ setup/service:
 upgrade-grpc:
 	$(GOGET) -u github.com/swallowarc/tictactoe_battle_proto
 	$(GOMOD) tidy
-mock-clean:
+mock/clean:
 	rm -Rf ./$(MOCK_DIR)
-mock-gen: mock-clean
+mock/gen: mock/clean
 	$(GOGENERATE) ./internal/domains/...
 	$(GOGENERATE) ./internal/usecases/interactors/...
 	$(GOGENERATE) ./internal/usecases/ports/...
