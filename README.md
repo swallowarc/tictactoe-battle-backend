@@ -1,4 +1,4 @@
-# tictactoe-battle-frontend
+# tictactoe-battle-backend
 
 This is a backend application implemented in Go language.  
 It works by communicating with frontend application implemented in the Flutter.
