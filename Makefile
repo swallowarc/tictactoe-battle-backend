@@ -41,7 +41,11 @@ build:
 setup/tools:
 	$(GOINSTALL) github.com/golang/mock/mockgen@v1.5.0
 setup/service:
+ifeq ($(shell uname),Linux)
+	$(DOCKER_COMPOSE_CMD) -f ./docker/docker-compose.yaml -f ./docker/docker-compose.override.yaml up -d
+else
 	$(DOCKER_COMPOSE_CMD) -f ./docker/docker-compose.yaml up -d
+endif
 upgrade-grpc:
 	$(GOGET) -u github.com/swallowarc/tictactoe_battle_proto
 	$(GOMOD) tidy
